@@ -1,79 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oceania Tactical</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <style>
-        /* Classic early-2000s styling */
         body {
             margin: 0;
-            padding: 0;
-            background-color: #003300; /* Deep green background */
-            background-image: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
-            font-family: Verdana, Arial, Helvetica, sans-serif;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
         }
-
-        /* Centered container using table layout */
-        .main-table {
-            width: 760px;
-            margin: 80px auto;
-            border: 3px solid #cccccc;
-            background-color: #000000;
-            box-shadow: 0 0 15px #000000;
-        }
-
-        /* Header bar reminiscent of early websites */
-        .header {
-            background: linear-gradient(#666666, #333333);
-            height: 30px;
-            border-bottom: 2px solid #999999;
-        }
-
-        /* Content area */
-        .content {
-            text-align: center;
-            padding: 30px;
-        }
-
-        /* Framed image with beveled border */
-        .image-frame {
-            display: inline-block;
-            padding: 8px;
-            background-color: #222222;
-            border: 4px ridge #999999; /* Classic 3D border */
-        }
-
-        .image-frame img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Footer bar */
-        .footer {
-            background: linear-gradient(#333333, #666666);
-            height: 20px;
-            border-top: 2px solid #999999;
+        img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
-
 <body>
-    <table class="main-table" cellpadding="0" cellspacing="0">
-        <tr>
-            <td class="header"></td>
-        </tr>
-        <tr>
-            <td class="content">
-                <div class="image-frame">
-                    <img src="g.png" alt="Oceania Tactical">
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="footer"></td>
-        </tr>
-    </table>
+    <img src="g.png" alt="Oceania Tactical Image">
 </body>
 </html>
