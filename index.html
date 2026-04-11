@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oceania Tactical</title>
-    <style>
-        body {
-            margin: 0;
-            background-color: #111;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-        img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oceania Tactical</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #0d0f0b;
+      background-image:
+        repeating-conic-gradient(#111408 0% 25%, #0d0f0b 25% 50%) 0 0 / 48px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    h1 {
+      font-size: clamp(48px, 10vw, 100px);
+      letter-spacing: 0.12em;
+      color: #e8e4d9;
+      text-align: center;
+    }
+    h1 span { color: #d4a843; }
+
+    img {
+      width: min(360px, 80vw);
+      display: block;
+      filter: grayscale(20%) contrast(1.1);
+      clip-path: polygon(0 0, 100% 0, 100% 92%, 92% 100%, 0 100%);
+      outline: 2px solid #d4a843;
+      outline-offset: 6px;
+    }
+
+    p {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      color: rgba(212,168,67,0.6);
+      text-transform: uppercase;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <img src="/gfx/g.png" alt="Oceania Tactical Image">
+  <h1>OCEANIA <span>TACTICAL</span></h1>
+  <img src="/gfx/g.png" alt="Oceania Tactical" />
+  <p>Arma Reforger · Oceania Region</p>
 </body>
 </html>
