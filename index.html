@@ -7,6 +7,7 @@
 <meta name="description" content="OTAC (Oceania Tactical) is an Arma Reforger milsim unit based in Australia and Oceania. Join our realistic military simulation community for weekly Sunday operations.">
 <meta name="keywords" content="reforger milsim unit australia, arma reforger milsim australia, oceania milsim, arma reforger oceania, australian arma unit, milsim unit australia, OTAC, Oceania Tactical, arma reforger clan australia, reforger unit oceania">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#18251C">
 <link rel="canonical" href="https://oceaniatactical.com/">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
@@ -23,487 +24,581 @@
 <meta name="twitter:description" content="Realistic Arma Reforger milsim unit based in Australia and Oceania. Weekly Sunday operations, structured ranks, and a serious tactical community.">
 <meta name="twitter:image" content="https://oceaniatactical.com/gfx/otac_banner.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="icon" type="image/x-icon" href="/gfx/otac.ico">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/public-sans.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E2C57A;
-    --dark: #0D0F12;
-    --dark-2: #151A1F;
-    --dark-3: #1C2329;
-    --olive-mid: #2C3A2E;
-    --text: #CDD5D8;
-    --text-muted: #7E8D91;
-    --border: rgba(201,168,76,0.18);
+  @font-face {
+    font-family: 'Archivo';
+    src: url('/fonts/archivo.woff2') format('woff2');
+    font-weight: 100 900;
+    font-stretch: 62% 125%;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Public Sans';
+    src: url('/fonts/public-sans.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* Palette sampled from the OTAC patch */
+  :root {
+    --bottle: #18251C;
+    --bottle-deep: #111A14;
+    --patch: #5F8A60;
+    --sand: #E6CF8B;
+    --sand-bright: #F2DFA6;
+    --canvas: #D9D4C3;
+    --canvas-dim: #A9AD9C;
+
+    --display: 'Archivo', 'Arial Narrow', sans-serif;
+    --sans: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --gutter: clamp(1.25rem, 5vw, 3rem);
+    --measure: 36rem;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--dark);
-    color: var(--text);
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
+    background: var(--bottle);
+    color: var(--canvas);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 4rem 2rem 4rem;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
+  /* Film grain, fixed so it never repaints on scroll */
+  body::after {
+    content: '';
+    position: fixed;
     inset: 0;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 60%, rgba(59,74,62,0.22) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 30% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .hero-grid {
+  img { display: block; max-width: 100%; height: auto; }
+
+  .wrap {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-stretch: 80%;
+    font-weight: 700;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--canvas);
+    margin-bottom: 1.25rem;
+  }
+
+  p { max-width: var(--measure); text-wrap: pretty; }
+
+  .skip {
     position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%);
-  }
-
-  .hero-badge {
-    display: inline-block;
-    border: 1px solid var(--border);
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.35rem 1rem;
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 1;
-    animation: fadeUp 0.8s ease both;
-  }
-
-.hero-emblem {
-  width: min(480px, 85vw);  /* was min(120px, 25vw) */
-  margin-bottom: 2.5rem;
-  position: relative;
-  z-index: 1;
-  animation: fadeUp 1s 0.2s ease both;
-  opacity: 0.9;
-}
-
-  .hero-tagline {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(0.85rem, 2vw, 1rem);
-    font-weight: 300;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    position: relative;
-    z-index: 1;
-    animation: fadeUp 1s 0.3s ease both;
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-cta {
-    position: relative;
-    z-index: 1;
-    animation: fadeUp 1s 0.4s ease both;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: var(--gold);
-    color: var(--dark);
-    text-decoration: none;
-    font-family: 'Oswald', sans-serif;
+    left: var(--gutter);
+    top: -4rem;
+    background: var(--sand);
+    color: var(--bottle);
+    padding: 0.5rem 1rem;
     font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.85rem 2.2rem;
-    transition: background 0.2s, transform 0.2s;
+    z-index: 2;
   }
+  .skip:focus { top: 1rem; }
 
-  .btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-  }
-
-  .btn-primary svg { width: 18px; height: 18px; }
-
-  /* ── SECTIONS ── */
-  section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 5rem 2rem;
-  }
-
-  .section-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 500;
-    color: #fff;
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
-  }
-
-  .section-body {
-    color: var(--text);
-    font-size: 1rem;
-    max-width: 640px;
-  }
-
-  /* divider */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: var(--border);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  /* ── INFO CARDS ── */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
-
-  .card {
-    border: 1px solid var(--border);
-    background: var(--dark-2);
-    padding: 1.75rem;
-  }
-
-  .card-icon {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 1rem;
-    color: var(--gold);
-  }
-
-  .card h3 {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #fff;
-    margin-bottom: 0.6rem;
-  }
-
-  .card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* ── MISSION TYPES ── */
-  .mission-list {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    border: 1px solid var(--border);
-  }
-
-  .mission-item {
-    padding: 1.1rem 1.5rem;
-    background: var(--dark-2);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.2s;
-  }
-
-  .mission-item:last-child { border-bottom: none; }
-  .mission-item:hover { background: var(--dark-3); }
-
-  .mission-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--gold);
-    flex-shrink: 0;
-  }
-
-  .mission-item span {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    font-size: 0.95rem;
-    color: var(--text);
-  }
-
-  /* ── REQUIREMENTS ── */
-  .req-list {
+  /* Button */
+  .btn {
     display: inline-flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin: 0 auto 2.5rem;
-    text-align: left;
+    align-items: center;
+    gap: 0.65rem;
+    background: var(--sand);
+    color: var(--bottle-deep);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    text-decoration: none;
+    padding: 0.9rem 1.6rem;
+    transition: background-color 0.15s, transform 0.1s;
+  }
+  .btn:hover { background: var(--sand-bright); }
+  .btn:active { transform: translateY(1px); }
+  .btn:focus-visible {
+    outline: 3px solid var(--sand);
+    outline-offset: 4px;
+  }
+  .btn svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: min(100dvh, 58rem);
+    display: grid;
+    align-content: end;
+    padding-block: 0 clamp(3rem, 7vw, 5rem);
+    overflow: hidden;
+    background: var(--bottle-deep);
+    border-bottom: 1px solid rgba(95, 138, 96, 0.3);
   }
 
-  .req-item {
+  .hero-photo {
+    position: absolute;
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: 72%;
+    object-fit: cover;
+    object-position: 58% 35%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent);
+    mask-image: linear-gradient(to bottom, #000 45%, transparent);
+  }
+
+  .hero-content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-logo {
+    width: clamp(17rem, 38vw, 30rem);
+    margin-bottom: 1.75rem;
+  }
+
+  .tagline {
+    display: grid;
+    justify-items: center;
+    gap: 0.9rem;
+    font-family: var(--display);
+    font-stretch: 80%;
+    font-weight: 400;
+    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+    line-height: 1.3;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--canvas-dim);
+    margin-bottom: 2.25rem;
+  }
+  .tagline-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 1.1em;
+    row-gap: 0.35em;
+  }
+  .tagline-row span { white-space: nowrap; }
+  .tagline .sep { color: var(--sand); letter-spacing: 0; }
+  .tagline .region {
+    font-size: 0.78em;
+    letter-spacing: 0.24em;
+    color: var(--sand);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-photo { animation: lights-up 1.6s ease-out both; }
+    @keyframes lights-up {
+      from { opacity: 0; transform: scale(1.03); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+
+  /* Middle band: faint contour map behind the handbook sections */
+  .field {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(to bottom, var(--bottle-deep), var(--bottle) 20rem);
+  }
+  .field::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.16;
+    background: url('/gfx/contours.svg') center top / 1400px 1400px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 80%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 80%, transparent);
+  }
+
+  /* Handbook layout: section name on the left, content on the right */
+  .brief {
+    padding-block: clamp(4.5rem, 9vw, 7.5rem) clamp(2rem, 4vw, 3rem);
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: 1.25rem clamp(2rem, 5vw, 5rem);
+    padding-block: clamp(2.75rem, 5vw, 4rem);
+    border-top: 1px solid rgba(217, 212, 195, 0.22);
+  }
+  .entry:first-child { border-top: 0; padding-top: 0; }
+
+  .entry h2 {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0;
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+  }
+
+  /* Small patch diamond before each section name */
+  .entry h2::before {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.65em;
+    vertical-align: 0.14em;
+    background: var(--patch);
+    transform: rotate(45deg);
+  }
+
+  .entry-body > * + * { margin-top: 1.5rem; }
+  .entry-body > * + .facts,
+  .entry-body > * + .mission-list { margin-top: 2.25rem; }
+
+  .lead {
+    font-size: clamp(1.1875rem, 1.8vw, 1.375rem);
+    line-height: 1.55;
+    max-width: 38rem;
+  }
+
+  .facts {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.75rem 2.25rem;
+  }
+  .facts h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--sand);
+    margin-bottom: 0.35rem;
+  }
+  .facts p { color: var(--canvas-dim); font-size: 0.9375rem; line-height: 1.65; }
+
+  .mission-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem 2.5rem;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+    background: rgba(17, 26, 20, 0.8);
+    border: 1px solid rgba(95, 138, 96, 0.35);
+  }
+  .mission-list li {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    font-size: 0.95rem;
-    color: var(--text);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--canvas);
   }
-
-  .req-check {
-    width: 20px;
-    height: 20px;
-    border: 1px solid var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .req-check::after {
+  .mission-list li::before {
     content: '';
-    width: 8px;
-    height: 8px;
-    background: var(--gold);
+    flex-shrink: 0;
+    width: 0.45rem;
+    height: 0.45rem;
+    background: var(--patch);
+    transform: rotate(45deg);
   }
 
-  /* ── FOOTER / JOIN ── */
-  .join-section {
-    background: linear-gradient(rgba(44,58,46,0.6), rgba(44,58,46,0.6)), url('gfx/web_foot.png') center 30%/cover no-repeat;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-    padding: 5rem 2rem;
+  /* Week strip: the op night lit up */
+  .week {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.3rem;
+    max-width: 38rem;
+    font-family: var(--display);
+    font-stretch: 80%;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
-
-  .join-section .section-title {
-    margin-bottom: 1rem;
+  .week li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 4.75rem;
+    padding: 0.5rem 0.25rem;
+    border: 1px solid rgba(95, 138, 96, 0.35);
+    background: rgba(17, 26, 20, 0.6);
+    color: var(--canvas-dim);
+    font-size: 0.875rem;
   }
-
-  #ops .cards {
-    margin-top: 2rem;
+  .week .on {
+    background: var(--sand);
+    border-color: var(--sand);
+    color: var(--bottle-deep);
   }
+  .week .on strong {
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    margin-top: 0.3rem;
+  }
+  .week .on small { font-size: 0.6875rem; letter-spacing: 0.12em; }
+  .entry-body > .week + p { margin-top: 2rem; }
+  .ops-local { color: var(--canvas-dim); font-size: 0.9375rem; }
 
-  .join-section p {
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
+  /* Join: closing band, the squad photo returns on the right */
+  .join {
+    position: relative;
+    overflow: hidden;
+    background: var(--bottle-deep);
+    border-top: 1px solid rgba(95, 138, 96, 0.3);
+    padding-block: clamp(4.5rem, 9vw, 7rem);
+  }
+  .join-photo {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(62%, 60rem);
+    height: 100%;
+    object-fit: cover;
+    object-position: 100% 30%;
+    opacity: 0.6;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 65%);
+    mask-image: linear-gradient(to right, transparent, #000 65%);
+  }
+  .join-content { position: relative; }
+  .join h2 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 1.5rem;
+  }
+  .req-list {
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+    margin-bottom: 2.5rem;
+  }
+  .req-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+  }
+  .req-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 0.45rem;
+    height: 0.85rem;
+    border: solid var(--sand);
+    border-width: 0 3px 3px 0;
+    transform: translateY(-0.1rem) rotate(40deg);
   }
 
   footer {
-    background: #0A0C0E;
-    padding: 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    background: var(--bottle-deep);
+    border-top: 1px solid rgba(95, 138, 96, 0.3);
+    padding-block: 1.5rem;
+    color: var(--canvas-dim);
+    font-size: 0.875rem;
   }
-
-  footer p {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
+  .footer-inner img { width: 1.75rem; height: 1.75rem; }
 
-  footer span { color: var(--gold); }
+  @media (max-width: 767px) {
+    .hero { min-height: 100dvh; }
+    .hero-photo { height: 58%; object-position: 62% 30%; }
+    .tagline-row { flex-direction: column; align-items: center; }
+    .tagline .sep { display: none; }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  @media (max-width: 600px) {
-    .cards { grid-template-columns: 1fr; }
+    .entry { grid-template-columns: 1fr; }
+    .entry h2 { position: static; }
+    .facts, .mission-list { grid-template-columns: 1fr; }
+    .join-photo {
+      width: 100%;
+      opacity: 0.3;
+      object-position: 85% 30%;
+      -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%);
+      mask-image: linear-gradient(to bottom, #000, transparent 85%);
+    }
   }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">OTAC – Oceania Tactical | Arma Reforger Milsim Unit Australia & Oceania</h1>
-  <div class="hero-badge">Australia / New Zealand Milsim Unit</div>
-
-  <img class="hero-emblem"
-    src="/gfx/otac_banner.png"
-    alt="OTAC – Oceania Tactical Arma Reforger Milsim Unit Australia">
-
-  <p class="hero-tagline">Platoon-Level Milsim &nbsp;·&nbsp; Reforger &nbsp;·&nbsp; Semi-Realistic Operations</p>
-
-  <div class="hero-cta">
-    <a href="https://discord.gg/Vr4JNQQngU" target="_blank" rel="noopener" class="btn-primary">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.062.103 18.073.11 18.08a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-      Join Our Discord
+<header class="hero">
+  <img class="hero-photo"
+    src="/gfx/squad-1920.jpg"
+    srcset="/gfx/squad-960.jpg 960w, /gfx/squad-1920.jpg 1920w"
+    sizes="100vw"
+    width="1920" height="600"
+    alt="Four OTAC soldiers in multicam and night-vision helmets, rifles raised"
+    fetchpriority="high">
+  <div class="wrap hero-content">
+    <img class="hero-logo"
+      src="/gfx/otac_banner.png"
+      width="1424" height="480"
+      alt="Oceania Tactical (OTAC)">
+    <h1 class="tagline">
+      <span class="tagline-row">
+        <span>Platoon-Level Milsim</span> <span class="sep" aria-hidden="true">·</span>
+        <span>Reforger</span> <span class="sep" aria-hidden="true">·</span>
+        <span>Semi-Realistic Operations</span>
+      </span>
+      <span class="region">Australia / New Zealand</span>
+    </h1>
+    <a href="https://discord.gg/Vr4JNQQngU" target="_blank" rel="noopener" class="btn">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.062.103 18.073.11 18.08a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      Join our Discord
     </a>
   </div>
-</div>
+</header>
 
-<!-- ABOUT -->
-<section id="about" class="reveal">
-  <div class="section-label">Who We Are</div>
-  <h2 class="section-title">Oceania Tactical</h2>
-  <p class="section-body">
-    OTAC operates as a semi-realistic milsim unit focused on professional execution and immersive operations.
-    We aim to provide a grounded, immersive milsim experience without overcomplication.
-  </p>
-  <div class="cards">
-    <div class="card reveal">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-      <h3>Based in ANZ</h3>
-      <p>Operated by Australian and New Zealand players across the Oceania region running on AEST-friendly schedules.</p>
-    </div>
-    <div class="card reveal">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-      <h3>Semi-Realistic</h3>
-      <p>Structured and professional without being overbearing. We balance realism with fun and approachability.</p>
-    </div>
-    <div class="card reveal">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
-      <h3>Community Focus</h3>
-      <p>A tight-knit unit where leadership is earned and every member plays a meaningful role in each operation.</p>
-    </div>
+<main id="main">
+
+  <div class="field">
+  <div class="wrap brief">
+
+    <!-- ABOUT -->
+    <section id="about" class="entry" aria-labelledby="about-title">
+      <h2 id="about-title">Oceania Tactical</h2>
+      <div class="entry-body">
+        <p class="lead">
+          OTAC operates as a semi-realistic milsim unit focused on professional execution and immersive operations.
+          We aim to provide a grounded, immersive milsim experience without overcomplication.
+        </p>
+        <ul class="facts">
+          <li>
+            <h3>Based in ANZ</h3>
+            <p>Operated by Australian and New Zealand players across the Oceania region running on AEST-friendly schedules.</p>
+          </li>
+          <li>
+            <h3>Semi-realistic</h3>
+            <p>Structured and professional without being overbearing. We balance realism with fun and approachability.</p>
+          </li>
+          <li>
+            <h3>Community focus</h3>
+            <p>A tight-knit unit where leadership is earned and every member plays a meaningful role in each operation.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MISSIONS -->
+    <section id="missions" class="entry" aria-labelledby="missions-title">
+      <h2 id="missions-title">Mission style</h2>
+      <div class="entry-body">
+        <p>
+          Our missions are built around a light infantry platoon supported by aviation assets, with an emphasis on variety to enable flexible objectives and execution by leadership and mission creators.
+        </p>
+        <ul class="mission-list">
+          <li>Air assault operations</li>
+          <li>Direct action raids</li>
+          <li>Reconnaissance missions</li>
+          <li>Special operations-style raids</li>
+          <li>Flexible objective structures</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- OPS SCHEDULE -->
+    <section id="ops" class="entry" aria-labelledby="ops-title">
+      <h2 id="ops-title">Operation times</h2>
+      <div class="entry-body">
+        <ol class="week" aria-hidden="true">
+          <li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li>
+          <li class="on">Sun<strong>1800</strong><small>AEST</small></li>
+        </ol>
+        <p>We run regular structured operations every week so you always have something to look forward to.</p>
+        <p>Operations kick off every Sunday from 1800 AEST. Be there, be ready.</p>
+        <p class="ops-local" id="ops-local" hidden></p>
+      </div>
+    </section>
+
   </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- MISSIONS -->
-<section id="missions" class="reveal">
-  <div class="section-label">How We Operate</div>
-  <h2 class="section-title">Mission Style</h2>
-  <p class="section-body">
-    Our missions are built around platoon-level tactics, with an emphasis on variety to enable flexible objectives and execution by leadership and mission creators.
-  </p>
-  <div class="mission-list reveal">
-    <div class="mission-item">
-      <div class="mission-dot"></div>
-      <span>Air Assault Operations</span>
-    </div>
-    <div class="mission-item">
-      <div class="mission-dot"></div>
-      <span>Direct Action Raids</span>
-    </div>
-    <div class="mission-item">
-      <div class="mission-dot"></div>
-      <span>Reconnaissance Missions</span>
-    </div>
-    <div class="mission-item">
-      <div class="mission-dot"></div>
-      <span>Special Operations-Style Raids</span>
-    </div>
-    <div class="mission-item">
-      <div class="mission-dot"></div>
-      <span>Flexible Objective Structures</span>
-    </div>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- OPS SCHEDULE -->
-<section id="ops" class="reveal">
-  <div class="section-label">Schedule</div>
-  <h2 class="section-title">Operation Times</h2>
-  <p class="section-body">
-    We run regular structured operations every week so you always have something to look forward to.
-  </p>
-  <div class="cards">
-    <div class="card reveal">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <h3>Weekly Sunday Ops</h3>
-      <p>Operations kick off every Sunday from <strong style="color: var(--gold);">1800 AEST</strong>. Be there, be ready.</p>
+  <!-- JOIN -->
+  <section id="join" class="join" aria-labelledby="join-title">
+    <img class="join-photo"
+      src="/gfx/squad-1920.jpg"
+      srcset="/gfx/squad-960.jpg 960w, /gfx/squad-1920.jpg 1920w"
+      sizes="(max-width: 767px) 100vw, 62vw"
+      width="1920" height="600"
+      alt="" loading="lazy">
+    <div class="wrap join-content">
+      <h2 id="join-title">Joining requirements</h2>
+      <ul class="req-list">
+        <li>18 years or older</li>
+        <li>PC only, console not supported</li>
+        <li>Ability to regularly attend Sunday operations</li>
+      </ul>
+      <a href="https://discord.gg/Vr4JNQQngU" target="_blank" rel="noopener" class="btn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.062.103 18.073.11 18.08a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Join our Discord
+      </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+</main>
 
-<!-- JOIN SECTION -->
-<div class="join-section" id="join">
-  <p class="section-label" style="text-align:center;">Ready to Enlist?</p>
-  <h2 class="section-title">Joining Requirements</h2>
-  <div class="req-list">
-    <div class="req-item">
-      <div class="req-check"></div>
-      <span>18 years or older</span>
-    </div>
-    <div class="req-item">
-      <div class="req-check"></div>
-      <span>PC only - console not supported</span>
-    </div>
-    <div class="req-item">
-      <div class="req-check"></div>
-      <span>Ability to regularly attend Sunday operations</span>
-    </div>
-  </div>
-  <br><br>
-  <a href="https://discord.gg/Vr4JNQQngU" target="_blank" rel="noopener" class="btn-primary">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.062.103 18.073.11 18.08a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-    Join Our Discord
-  </a>
-</div>
-
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 <span>Oceania Tactical</span> &nbsp;·&nbsp; Australia &amp; New Zealand </p>
+  <div class="wrap footer-inner">
+    <img src="/gfx/otac.png" width="250" height="250" alt="" loading="lazy">
+    <span>© 2026 Oceania Tactical · Australia &amp; New Zealand</span>
+  </div>
 </footer>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  // Show the next op in the viewer's own time zone when it differs from AEST
+  (function () {
+    const out = document.getElementById('ops-local');
+    try {
+      const OP_TZ = 'Australia/Brisbane'; // AEST, UTC+10 all year
+      const wall = (date, timeZone) => {
+        const parts = new Intl.DateTimeFormat('en-US', {
+          timeZone, hourCycle: 'h23', weekday: 'short',
+          year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+        }).formatToParts(date);
+        return Object.fromEntries(parts.map(p => [p.type, p.value]));
+      };
+      const offsetMs = (date, timeZone) => {
+        const w = wall(date, timeZone);
+        return Date.UTC(+w.year, w.month - 1, +w.day, +w.hour, +w.minute) - Math.floor(date.getTime() / 60000) * 60000;
+      };
+
+      const now = new Date();
+      const w = wall(now, OP_TZ);
+      const daysToSunday = (7 - ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(w.weekday)) % 7;
+      const toUtc = (days) => {
+        const local = Date.UTC(+w.year, w.month - 1, +w.day + days, 18, 0);
+        const guess = new Date(local - offsetMs(now, OP_TZ));
+        return new Date(local - offsetMs(guess, OP_TZ));
+      };
+      let op = toUtc(daysToSunday);
+      if (op < now) op = toUtc(daysToSunday + 7);
+
+      if (offsetMs(op, OP_TZ) === -op.getTimezoneOffset() * 60000) return;
+
+      const when = new Intl.DateTimeFormat(undefined, {
+        weekday: 'long', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+      }).format(op);
+      out.textContent = 'Where you are, that is ' + when + '.';
+      out.hidden = false;
+    } catch (e) { /* leave the AEST time on its own */ }
+  })();
 </script>
 </body>
 </html>
