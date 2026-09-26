@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OTAC | Arma Reforger Milsim Unit Australia & Oceania</title>
-<meta name="description" content="OTAC (Oceania Tactical) is an Arma Reforger milsim unit based in Australia and Oceania. Join our realistic military simulation community for weekly Sunday operations.">
-<meta name="keywords" content="reforger milsim unit australia, arma reforger milsim australia, oceania milsim, arma reforger oceania, australian arma unit, milsim unit australia, OTAC, Oceania Tactical, arma reforger clan australia, reforger unit oceania">
+<title>OTAC | Arma Reforger Milsim Unit Australia & New Zealand</title>
+<meta name="description" content="OTAC (Oceania Tactical) is a semi-realistic Arma Reforger milsim unit for Australia and New Zealand, running platoon-level operations every Sunday at 1800 AEST.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#18251C">
 <link rel="canonical" href="https://oceaniatactical.com/">
@@ -13,18 +12,55 @@
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Oceania Tactical">
+<meta property="og:locale" content="en_AU">
 <meta property="og:url" content="https://oceaniatactical.com/">
-<meta property="og:title" content="OTAC | Arma Reforger Milsim Unit Australia">
-<meta property="og:description" content="Realistic Arma Reforger milsim unit based in Australia and Oceania. Weekly Sunday operations, structured ranks, and a serious tactical community.">
-<meta property="og:image" content="https://oceaniatactical.com/gfx/otac_banner.png">
+<meta property="og:title" content="OTAC | Arma Reforger Milsim Unit Australia & New Zealand">
+<meta property="og:description" content="Semi-realistic Arma Reforger milsim unit for Australia and New Zealand. Platoon-level operations every Sunday at 1800 AEST.">
+<meta property="og:image" content="https://oceaniatactical.com/gfx/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Oceania Tactical logo over a soldier firing a shoulder-launched rocket, with the text: Platoon-level milsim, Arma Reforger, Australia / New Zealand, Sunday Operations.">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="OTAC | Arma Reforger Milsim Unit Australia">
-<meta name="twitter:description" content="Realistic Arma Reforger milsim unit based in Australia and Oceania. Weekly Sunday operations, structured ranks, and a serious tactical community.">
-<meta name="twitter:image" content="https://oceaniatactical.com/gfx/otac_banner.png">
+<meta name="twitter:title" content="OTAC | Arma Reforger Milsim Unit Australia & New Zealand">
+<meta name="twitter:description" content="Semi-realistic Arma Reforger milsim unit for Australia and New Zealand. Platoon-level operations every Sunday at 1800 AEST.">
+<meta name="twitter:image" content="https://oceaniatactical.com/gfx/og-card.jpg">
+<meta name="twitter:image:alt" content="Oceania Tactical logo over a soldier firing a shoulder-launched rocket, with the text: Platoon-level milsim, Arma Reforger, Australia / New Zealand, Sunday Operations.">
+
+<!-- Structured data: tells search engines who OTAC is -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://oceaniatactical.com/#org",
+      "name": "Oceania Tactical",
+      "alternateName": "OTAC",
+      "url": "https://oceaniatactical.com/",
+      "logo": "https://oceaniatactical.com/gfx/otac.png",
+      "description": "Semi-realistic Arma Reforger milsim unit for Australia and New Zealand, running platoon-level operations every Sunday at 1800 AEST.",
+      "areaServed": ["Australia", "New Zealand"],
+      "sameAs": ["https://discord.gg/Vr4JNQQngU"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://oceaniatactical.com/#website",
+      "name": "Oceania Tactical",
+      "alternateName": "OTAC",
+      "url": "https://oceaniatactical.com/",
+      "inLanguage": "en-AU",
+      "publisher": { "@id": "https://oceaniatactical.com/#org" }
+    }
+  ]
+}
+</script>
 
 <link rel="icon" type="image/x-icon" href="/gfx/otac.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="/gfx/icon-192.png">
+<link rel="apple-touch-icon" href="/gfx/apple-touch-icon.png">
 <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/public-sans.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -56,12 +92,16 @@
     --sans: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     --gutter: clamp(1.25rem, 5vw, 3rem);
+    --dock-h: 3.5rem;
     --measure: 36rem;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--dock-h) + 1rem); /* anchor jumps land below the slim bar */
+  }
 
   body {
     background: var(--bottle);
@@ -111,7 +151,7 @@
     color: var(--bottle);
     padding: 0.5rem 1rem;
     font-weight: 600;
-    z-index: 2;
+    z-index: 11;
   }
   .skip:focus { top: 1rem; }
 
@@ -155,7 +195,7 @@
     width: 100%;
     height: 72%;
     object-fit: cover;
-    object-position: 58% 35%;
+    object-position: var(--hero-pos, 58% 35%);
     -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent);
     mask-image: linear-gradient(to bottom, #000 45%, transparent);
   }
@@ -169,6 +209,13 @@
     text-align: center;
   }
 
+  /* The H1 holds the logo (its alt text carries the unit name) and the tagline */
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 400;
+  }
   .hero-logo {
     width: clamp(17rem, 38vw, 30rem);
     margin-bottom: 1.75rem;
@@ -203,14 +250,66 @@
     color: var(--sand);
   }
 
+  /* Page load: photo fades up, then logo, tagline and button follow in turn */
   @media (prefers-reduced-motion: no-preference) {
     .hero-photo { animation: lights-up 1.6s ease-out both; }
+    .hero-logo,
+    .tagline,
+    .hero-content .btn { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+    .hero-logo { animation-delay: 0.45s; }
+    .tagline { animation-delay: 0.65s; }
+    .hero-content .btn { animation-delay: 0.85s; }
     @keyframes lights-up {
       from { opacity: 0; transform: scale(1.03); }
       to   { opacity: 1; transform: none; }
     }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: none; }
+    }
   }
 
+  /* Slim bar that slides in once the hero has scrolled away */
+  .dock {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 10;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: rgba(17, 26, 20, 0.96);
+    border-bottom: 1px solid rgba(95, 138, 96, 0.3);
+    transform: translateY(-100%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .dock.is-shown { transform: none; }
+  .dock-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: var(--dock-h);
+  }
+  .dock-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--canvas);
+    text-decoration: none;
+    font-family: var(--display);
+    font-stretch: 80%;
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+  .dock-brand img { width: 1.75rem; height: 1.75rem; }
+  .dock-brand:focus-visible { outline: 2px solid var(--sand); outline-offset: 4px; }
+  .btn-sm { padding: 0.5rem 1rem; font-size: 0.9375rem; gap: 0.5rem; }
+  .btn-sm svg { width: 1.1rem; height: 1.1rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .dock { transition: none; }
+  }
+  /* Small phones: keep the slim bar on one line */
+  @media (max-width: 400px) {
+    .dock-name, .dock-our { display: none; }
+  }
   /* Middle band: faint contour map behind the handbook sections */
   .field {
     position: relative;
@@ -248,7 +347,7 @@
     line-height: 1.1;
     margin: 0;
     position: sticky;
-    top: 2rem;
+    top: calc(var(--dock-h) + env(safe-area-inset-top, 0px) + 2rem); /* stop below the slim bar */
     align-self: start;
   }
 
@@ -268,22 +367,29 @@
   .entry-body > * + .facts,
   .entry-body > * + .mission-list { margin-top: 2.25rem; }
 
+  /* Section paragraphs sit 1px above the 17px panel labels */
+  .entry-body > p:not(.ops-local) { font-size: 1.125rem; }
+
   .lead {
-    font-size: clamp(1.1875rem, 1.8vw, 1.375rem);
-    line-height: 1.55;
     max-width: 38rem;
   }
 
   .facts {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 1.75rem 2.25rem;
+    grid-template-columns: 1fr;
+    gap: 1.75rem 2rem;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+    background: rgba(17, 26, 20, 0.8);
+    border: 1px solid rgba(95, 138, 96, 0.35);
+  }
+  @media (min-width: 1024px) {
+    .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   .facts h3 {
     font-family: var(--sans);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.0625rem;
     color: var(--sand);
     margin-bottom: 0.35rem;
   }
@@ -354,7 +460,65 @@
   }
   .week .on small { font-size: 0.6875rem; letter-spacing: 0.12em; }
   .entry-body > .week + p { margin-top: 2rem; }
+
+  /* Live countdown, attached under the week strip like a mission clock */
+  .entry-body > .week + .countdown { margin-top: 0.3rem; }
+  .entry-body > .countdown + p { margin-top: 2rem; }
+  .countdown {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    max-width: 38rem;
+    padding: 1.25rem clamp(1.25rem, 3vw, 1.75rem);
+    border: 1px solid rgba(95, 138, 96, 0.35);
+    background: rgba(17, 26, 20, 0.6);
+    font-family: var(--display);
+    font-stretch: 80%;
+  }
+  .countdown[hidden],
+  .countdown-units[hidden] { display: none; }
+  .countdown-label {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--canvas-dim);
+  }
+  .countdown-underway .countdown-label {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--sand);
+  }
   .ops-local { color: var(--canvas-dim); font-size: 0.9375rem; }
+  .countdown-units {
+    display: flex;
+    gap: clamp(1rem, 3.5vw, 2rem);
+  }
+  .countdown-units span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 2.2ch;
+  }
+  .countdown-units b {
+    font-stretch: 75%;
+    font-weight: 700;
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--sand);
+  }
+  .countdown-units small {
+    margin-top: 0.4rem;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--canvas-dim);
+  }
 
   /* Join: closing band, the squad photo returns on the right */
   .join {
@@ -384,7 +548,11 @@
     list-style: none;
     display: grid;
     gap: 0.85rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .join-next {
+    color: var(--canvas-dim);
+    margin-bottom: 1.25rem;
   }
   .req-list li {
     display: flex;
@@ -413,11 +581,55 @@
     align-items: center;
     gap: 0.75rem;
   }
-  .footer-inner img { width: 1.75rem; height: 1.75rem; }
+  /* Easter egg overlay */
+  .egg {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    padding: var(--gutter);
+    background: rgba(10, 15, 12, 0.8);
+    cursor: pointer;
+  }
+  .egg[hidden] { display: none; }
+  .egg video {
+    max-width: min(90vw, 32rem);
+    max-height: 75vh;
+    border: 1px solid var(--sand);
+  }
+  .egg-hint {
+    font-family: var(--display);
+    font-stretch: 80%;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--canvas-dim);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .egg:not([hidden]) { animation: egg-fade 0.5s ease-out; }
+    .egg:not([hidden]) video { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+    @keyframes egg-fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  }
+
+  .footer-inner img { flex-shrink: 0; width: 2.5rem; height: 2.5rem; }
+  .footer-inner p { max-width: none; }
+  .footer-legal {
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
 
   @media (max-width: 767px) {
     .hero { min-height: 100dvh; }
-    .hero-photo { height: 58%; object-position: 62% 30%; }
+    .hero-photo { height: 58%; object-position: var(--hero-pos-m, 62% 30%); }
     .tagline-row { flex-direction: column; align-items: center; }
     .tagline .sep { display: none; }
 
@@ -432,32 +644,163 @@
       mask-image: linear-gradient(to bottom, #000, transparent 85%);
     }
   }
+  /* Roles, inside the Oceania Tactical section */
+  .entry-body > * + .roles { margin-top: 3rem; }
+  .roles-title {
+    font-family: var(--display);
+    font-stretch: 80%;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.1;
+    color: var(--canvas);
+    margin-bottom: 0.75rem;
+  }
+  .roles > p { font-size: 1.125rem; }
+  .roles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  @media (min-width: 1024px) {
+    .roles-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  }
+  .roles-group {
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+    background: rgba(17, 26, 20, 0.8);
+    border: 1px solid rgba(95, 138, 96, 0.35);
+  }
+  .roles-group h4 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--sand);
+  }
+  .roles-group .roles-note {
+    margin-top: 0.2rem;
+    font-size: 0.9375rem;
+    color: var(--canvas-dim);
+  }
+  .roles-group ul {
+    list-style: none;
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 1.1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(217, 212, 195, 0.12);
+  }
+  .roles-group li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--canvas);
+  }
+  .roles-group li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 0.45rem;
+    height: 0.45rem;
+    background: var(--patch);
+    transform: translateY(-0.1rem) rotate(45deg);
+  }
+  /* Specialist roles are earned: outlined marker instead of solid */
+  .roles-group--earned li::before {
+    background: transparent;
+    border: 1.5px solid var(--sand);
+  }
+  .roles-group li span {
+    font-weight: 400;
+    color: var(--canvas-dim);
+  }
+
+  /* Very small phones: give "1800" room inside the Sunday box */
+  @media (max-width: 360px) {
+    .week { gap: 0.2rem; }
+    .week .on strong { font-size: 1.125rem; }
+    .week .on small { font-size: 0.625rem; letter-spacing: 0.06em; }
+  }
 </style>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="hero">
-  <img class="hero-photo"
-    src="/gfx/squad-1920.jpg"
-    srcset="/gfx/squad-960.jpg 960w, /gfx/squad-1920.jpg 1920w"
+<div class="dock" id="dock" aria-hidden="true" inert>
+  <div class="wrap dock-inner">
+    <a class="dock-brand" href="#top">
+      <img src="/gfx/otac.png" width="250" height="250" alt="">
+      <span class="dock-name">Oceania Tactical</span>
+    </a>
+    <a href="https://discord.gg/Vr4JNQQngU" target="_blank" rel="noopener" class="btn btn-sm">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.062.103 18.073.11 18.08a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      <span>Join<span class="dock-our"> our</span> Discord</span>
+    </a>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <img class="hero-photo" id="hero-photo"
     sizes="100vw"
-    width="1920" height="600"
-    alt="Four OTAC soldiers in multicam and night-vision helmets, rifles raised"
+    width="1920" height="1080"
+    alt=""
     fetchpriority="high">
+  <script>
+    // Pick a random hero photo each visit. The src is set here (not in the markup) so only the chosen one downloads.
+    // To add one: drop hero-N.jpg (2560 wide) and hero-N-1280.jpg into gfx/hero and add a line below.
+    // "d" and "m" are optional desktop and phone crops (object-position) for images whose subject sits off-centre.
+    // "w" is the width of hero-N.jpg when the original was smaller than 2560.
+    (function () {
+      var HERO_PHOTOS = [
+        { alt: 'OTAC soldier firing a shoulder-launched rocket, smoke and fire behind him' },
+        { alt: 'Four OTAC soldiers in night-vision helmets, lit against the dark' },
+        { alt: 'Black Hawk landed in a coastal field as soldiers move out', m: '22% 30%' },
+        { alt: 'Troops running from a Chinook landed on a beach' },
+        { alt: 'View from inside a helicopter doorway as a soldier steps out' },
+        { alt: 'Soldiers advancing through smoke along a wooden fence', m: '72% 30%' },
+        { alt: 'OTAC members gathered in a briefing room with lockers and folding chairs', w: 1920 },
+        { alt: 'Machine gunner kneeling in long grass in golden light', m: '72% 30%' },
+        { alt: 'Chinook and Black Hawk over a hillside at dusk', m: '20% 30%' },
+        { alt: 'Soldiers assaulting a farmhouse on the edge of a village', m: '72% 30%' },
+        { alt: 'Armoured vehicle and infantry advancing down a dirt road' },
+        { alt: 'Two soldiers patrolling through tall grass at dusk', m: '30% 30%' },
+        { alt: 'Three OTAC soldiers lit red against a dark night sky', d: '50% 5%', m: '42% 10%' }
+      ];
+      var i = Math.floor(Math.random() * HERO_PHOTOS.length);
+      var n = i + 1;
+      var photo = HERO_PHOTOS[i];
+      var img = document.getElementById('hero-photo');
+      img.alt = photo.alt;
+      if (photo.d) img.style.setProperty('--hero-pos', photo.d);
+      if (photo.m) img.style.setProperty('--hero-pos-m', photo.m);
+      img.srcset = '/gfx/hero/hero-' + n + '-1280.jpg 1280w, /gfx/hero/hero-' + n + '.jpg ' + (photo.w || 2560) + 'w';
+      img.src = '/gfx/hero/hero-' + n + '.jpg';
+    })();
+  </script>
+  <noscript>
+    <img class="hero-photo"
+      src="/gfx/hero/hero-1.jpg"
+      srcset="/gfx/hero/hero-1-1280.jpg 1280w, /gfx/hero/hero-1.jpg 2560w"
+      sizes="100vw"
+      width="1920" height="1080"
+      alt="OTAC soldier firing a shoulder-launched rocket, smoke and fire behind him">
+    <style>#hero-photo { display: none; }</style>
+  </noscript>
   <div class="wrap hero-content">
-    <img class="hero-logo"
-      src="/gfx/otac_banner.png"
-      width="1424" height="480"
-      alt="Oceania Tactical (OTAC)">
-    <h1 class="tagline">
-      <span class="tagline-row">
-        <span>Platoon-Level Milsim</span> <span class="sep" aria-hidden="true">·</span>
-        <span>Reforger</span> <span class="sep" aria-hidden="true">·</span>
-        <span>Semi-Realistic Operations</span>
+    <h1 class="hero-title">
+      <img class="hero-logo"
+        src="/gfx/otac_banner.png"
+        width="1424" height="480"
+        alt="Oceania Tactical (OTAC)">
+      <span class="tagline">
+        <span class="tagline-row">
+          <span>Platoon-Level Milsim</span> <span class="sep" aria-hidden="true">·</span>
+          <span>Arma Reforger</span> <span class="sep" aria-hidden="true">·</span>
+          <span>Semi-Realistic Operations</span>
+        </span>
+        <span class="region">Australia / New Zealand</span>
       </span>
-      <span class="region">Australia / New Zealand</span>
     </h1>
     <a href="https://discord.gg/Vr4JNQQngU" target="_blank" rel="noopener" class="btn">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.062.103 18.073.11 18.08a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
@@ -476,23 +819,51 @@
       <h2 id="about-title">Oceania Tactical</h2>
       <div class="entry-body">
         <p class="lead">
-          OTAC operates as a semi-realistic milsim unit focused on professional execution and immersive operations.
-          We aim to provide a grounded, immersive milsim experience without overcomplication.
+          Oceania Tactical (OTAC) is a semi-realistic Arma Reforger milsim unit focused on professional execution and immersive operations.
+          Built around a single infantry platoon, we aim to provide a grounded milsim experience without overcomplication.
         </p>
         <ul class="facts">
           <li>
             <h3>Based in ANZ</h3>
-            <p>Operated by Australian and New Zealand players across the Oceania region running on AEST-friendly schedules.</p>
+            <p>An Oceania unit running all operations on AEST-friendly schedules, with members welcome from any time zone.</p>
           </li>
           <li>
-            <h3>Semi-realistic</h3>
-            <p>Structured and professional without being overbearing. We balance realism with fun and approachability.</p>
+            <h3>Balanced realism</h3>
+            <p>Structured and professional without being overbearing, with realism set at a level that stays fun and approachable.</p>
           </li>
           <li>
-            <h3>Community focus</h3>
-            <p>A tight-knit unit where leadership is earned and every member plays a meaningful role in each operation.</p>
+            <h3>Every role matters</h3>
+            <p>A welcoming community where operations are built around the full platoon, from the rifle sections through to support roles.</p>
           </li>
         </ul>
+        <div class="roles">
+          <h3 class="roles-title">Roles</h3>
+          <p>1-1 is an infantry platoon of three 8-man rifle sections and a direct fire support weapons (DFSW) section, operating under a single chain of command. Every mission is built for the platoon to carry out. The specialist and support roles work alongside it, handling command, communications, casualty care and aviation so the sections can stay focused on the objective.</p>
+          <div class="roles-grid">
+            <div class="roles-group">
+              <h4>1-1 Infantry Platoon</h4>
+              <p class="roles-note">The core of every operation</p>
+              <ul>
+                <li>Section Commander / Fireteam Leader</li>
+                <li>LSW Gunner</li>
+                <li>Grenadier</li>
+                <li>Rifleman</li>
+                <li>DFSW Gunner <span>MMG, MAT</span></li>
+              </ul>
+            </div>
+            <div class="roles-group roles-group--earned">
+              <h4>Specialist and support</h4>
+              <p class="roles-note">Supporting the platoon</p>
+              <ul>
+                <li>Platoon Commander</li>
+                <li>Platoon Signaller</li>
+                <li>Platoon Medic</li>
+                <li>Rotary Wing Pilot</li>
+                <li>Game Master</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -501,13 +872,14 @@
       <h2 id="missions-title">Mission style</h2>
       <div class="entry-body">
         <p>
-          Our missions are built around a light infantry platoon supported by aviation assets, with an emphasis on variety to enable flexible objectives and execution by leadership and mission creators.
+          Our missions are built around a light infantry platoon supported by aviation elements. They range from single-night raids to multi-week campaigns with a continuing story. We put an emphasis on variety, giving mission creators freedom in how they set objectives and leadership freedom in how they carry them out.
         </p>
         <ul class="mission-list">
           <li>Air assault operations</li>
           <li>Direct action raids</li>
           <li>Reconnaissance missions</li>
-          <li>Special operations-style raids</li>
+          <li>Seize and hold objectives</li>
+          <li>Game Master-run operations</li>
           <li>Flexible objective structures</li>
         </ul>
       </div>
@@ -521,6 +893,15 @@
           <li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li>
           <li class="on">Sun<strong>1800</strong><small>AEST</small></li>
         </ol>
+        <div class="countdown" id="countdown" role="timer" hidden>
+          <p class="countdown-label" id="countdown-label">Next operation in</p>
+          <p class="countdown-units" id="countdown-units">
+            <span><b data-unit="d">0</b><small>Days</small></span>
+            <span><b data-unit="h">00</b><small>Hrs</small></span>
+            <span><b data-unit="m">00</b><small>Min</small></span>
+            <span><b data-unit="s">00</b><small>Sec</small></span>
+          </p>
+        </div>
         <p>We run regular structured operations every week so you always have something to look forward to.</p>
         <p>Operations kick off every Sunday from 1800 AEST. Be there, be ready.</p>
         <p class="ops-local" id="ops-local" hidden></p>
@@ -532,19 +913,33 @@
 
   <!-- JOIN -->
   <section id="join" class="join" aria-labelledby="join-title">
-    <img class="join-photo"
-      src="/gfx/squad-1920.jpg"
-      srcset="/gfx/squad-960.jpg 960w, /gfx/squad-1920.jpg 1920w"
+    <img class="join-photo" id="join-photo"
+      src="/gfx/join/join-1.jpg"
+      srcset="/gfx/join/join-1-960.jpg 960w, /gfx/join/join-1.jpg 1920w"
       sizes="(max-width: 767px) 100vw, 62vw"
-      width="1920" height="600"
+      width="1920" height="1080"
       alt="" loading="lazy">
+    <script>
+      // Pick a random join photo each visit (runs before the lazy image starts loading).
+      // To add one: drop join-N.jpg and join-N-960.jpg into gfx/join and bump the count.
+      (function () {
+        var JOIN_PHOTO_COUNT = 6;
+        var n = 1 + Math.floor(Math.random() * JOIN_PHOTO_COUNT);
+        var img = document.getElementById('join-photo');
+        img.srcset = '/gfx/join/join-' + n + '-960.jpg 960w, /gfx/join/join-' + n + '.jpg 1920w';
+        img.src = '/gfx/join/join-' + n + '.jpg';
+      })();
+    </script>
     <div class="wrap join-content">
       <h2 id="join-title">Joining requirements</h2>
       <ul class="req-list">
         <li>18 years or older</li>
-        <li>PC only, console not supported</li>
-        <li>Ability to regularly attend Sunday operations</li>
+        <li>PC only (console not supported)</li>
+        <li>Working microphone</li>
+        <li>Able to communicate in English</li>
+        <li>Able to attend Sunday operations regularly</li>
       </ul>
+      <p class="join-next">Join the Discord to start the recruitment process.</p>
       <a href="https://discord.gg/Vr4JNQQngU" target="_blank" rel="noopener" class="btn">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.062.103 18.073.11 18.08a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
         Join our Discord
@@ -557,14 +952,23 @@
 <footer>
   <div class="wrap footer-inner">
     <img src="/gfx/otac.png" width="250" height="250" alt="" loading="lazy">
-    <span>© 2026 Oceania Tactical · Australia &amp; New Zealand</span>
+    <div>
+      <p>© 2026 Oceania Tactical · Australia &amp; New Zealand</p>
+      <p class="footer-legal">Arma Reforger is a trademark of Bohemia Interactive. OTAC is an independent community and is not affiliated with or endorsed by Bohemia Interactive.</p>
+    </div>
   </div>
 </footer>
 
+<div class="egg" id="egg" hidden>
+  <video playsinline preload="none"></video>
+  <p class="egg-hint">Click to close</p>
+</div>
+
 <script>
-  // Show the next op in the viewer's own time zone when it differs from AEST
+  // Next op: live countdown, plus the start time in the viewer's own time zone
   (function () {
-    const out = document.getElementById('ops-local');
+    const countdown = document.getElementById('countdown');
+    const OP_LENGTH_MS = 3 * 60 * 60 * 1000; // treat an op as running for 3 hours after kick-off
     try {
       const OP_TZ = 'Australia/Brisbane'; // AEST, UTC+10 all year
       const wall = (date, timeZone) => {
@@ -579,25 +983,100 @@
         return Date.UTC(+w.year, w.month - 1, +w.day, +w.hour, +w.minute) - Math.floor(date.getTime() / 60000) * 60000;
       };
 
-      const now = new Date();
-      const w = wall(now, OP_TZ);
-      const daysToSunday = (7 - ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(w.weekday)) % 7;
-      const toUtc = (days) => {
-        const local = Date.UTC(+w.year, w.month - 1, +w.day + days, 18, 0);
-        const guess = new Date(local - offsetMs(now, OP_TZ));
-        return new Date(local - offsetMs(guess, OP_TZ));
+      // Start of the current op if one is running, otherwise the next one
+      const nextOp = () => {
+        const now = new Date();
+        const w = wall(now, OP_TZ);
+        const daysToSunday = (7 - ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(w.weekday)) % 7;
+        const toUtc = (days) => {
+          const local = Date.UTC(+w.year, w.month - 1, +w.day + days, 18, 0);
+          const guess = new Date(local - offsetMs(now, OP_TZ));
+          return new Date(local - offsetMs(guess, OP_TZ));
+        };
+        let op = toUtc(daysToSunday);
+        if (op.getTime() + OP_LENGTH_MS < now) op = toUtc(daysToSunday + 7);
+        return op;
       };
-      let op = toUtc(daysToSunday);
-      if (op < now) op = toUtc(daysToSunday + 7);
 
-      if (offsetMs(op, OP_TZ) === -op.getTimezoneOffset() * 60000) return;
-
-      const when = new Intl.DateTimeFormat(undefined, {
+      const label = document.getElementById('countdown-label');
+      const local = document.getElementById('ops-local');
+      const units = document.getElementById('countdown-units');
+      const cell = {};
+      units.querySelectorAll('b').forEach((b) => { cell[b.dataset.unit] = b; });
+      const pad = (n) => String(n).padStart(2, '0');
+      const localTime = new Intl.DateTimeFormat(undefined, {
         weekday: 'long', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
-      }).format(op);
-      out.textContent = 'Where you are, that is ' + when + '.';
-      out.hidden = false;
-    } catch (e) { /* leave the AEST time on its own */ }
+      });
+
+      const tick = () => {
+        const op = nextOp();
+        const secs = Math.floor((op - new Date()) / 1000);
+        const underway = secs <= 0;
+        countdown.classList.toggle('countdown-underway', underway);
+        units.hidden = underway;
+        label.textContent = underway ? 'Operation currently in progress.' : 'Next operation in';
+
+        // Separate line under the text, only for visitors whose clock differs from AEST
+        const differs = offsetMs(op, OP_TZ) !== -op.getTimezoneOffset() * 60000;
+        local.textContent = 'Where you are, that is ' + localTime.format(op) + '.';
+        local.hidden = !differs;
+        if (!underway) {
+          cell.d.textContent = Math.floor(secs / 86400);
+          cell.h.textContent = pad(Math.floor((secs % 86400) / 3600));
+          cell.m.textContent = pad(Math.floor((secs % 3600) / 60));
+          cell.s.textContent = pad(secs % 60);
+        }
+        countdown.hidden = false;
+      };
+
+      tick();
+      setInterval(tick, 1000);
+    } catch (e) { /* leave the AEST time in the text on its own */ }
+  })();
+
+  // Slide the bar in once the hero is off screen; it stays for the rest of the page
+  (function () {
+    const dock = document.getElementById('dock');
+    if (!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(([e]) => {
+      const show = !e.isIntersecting;
+      dock.classList.toggle('is-shown', show);
+      dock.inert = !show;
+      dock.setAttribute('aria-hidden', String(!show));
+    }).observe(document.getElementById('top'));
+  })();
+
+  // Easter eggs: type a code anywhere to play its secret video with sound (only downloaded when triggered)
+  (function () {
+    const EGGS = {
+      bob: { src: '/gfx/egg/bob.mp4', volume: 0.3 },
+      lin: { src: '/gfx/egg/lin.mp4', volume: 0.1 },
+    };
+    const egg = document.getElementById('egg');
+    const video = egg.querySelector('video');
+    const longest = Math.max(...Object.keys(EGGS).map((c) => c.length));
+    let typed = '';
+    const close = () => {
+      video.pause();
+      egg.hidden = true;
+    };
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') return close();
+      if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+      typed = (typed + e.key.toLowerCase()).slice(-longest);
+      const code = Object.keys(EGGS).find((c) => typed.endsWith(c));
+      if (!code) return;
+      typed = '';
+      const src = new URL(EGGS[code].src, location.href).href;
+      if (video.src !== src) video.src = src;
+      video.volume = EGGS[code].volume;
+      video.currentTime = 0;
+      // Typing counts as interacting with the page, so the browser allows sound here
+      video.play().then(() => { egg.hidden = false; }).catch(close);
+    });
+    video.addEventListener('ended', close);
+    video.addEventListener('error', close);
+    egg.addEventListener('click', close);
   })();
 </script>
 </body>
