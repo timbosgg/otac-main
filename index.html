@@ -597,8 +597,10 @@
   }
   .egg[hidden] { display: none; }
   .egg video {
-    max-width: min(90vw, 32rem);
-    max-height: 75vh;
+    /* Same display size for every egg (bob's native 480px tall), whatever the file's own size */
+    height: min(480px, 75vh);
+    width: auto;
+    max-width: 90vw;
     border: 1px solid var(--sand);
   }
   .egg-hint {
@@ -639,7 +641,7 @@
     .join-photo {
       width: 100%;
       opacity: 0.3;
-      object-position: 85% 30%;
+      object-position: var(--join-pos-m, 85% 30%);
       -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%);
       mask-image: linear-gradient(to bottom, #000, transparent 85%);
     }
@@ -921,11 +923,17 @@
       alt="" loading="lazy">
     <script>
       // Pick a random join photo each visit (runs before the lazy image starts loading).
-      // To add one: drop join-N.jpg and join-N-960.jpg into gfx/join and bump the count.
+      // To add one: drop join-N.jpg and join-N-960.jpg into gfx/join and add a line below.
+      // "m" is an optional phone crop (object-position) for images whose subject sits off-centre.
       (function () {
-        var JOIN_PHOTO_COUNT = 6;
-        var n = 1 + Math.floor(Math.random() * JOIN_PHOTO_COUNT);
+        var JOIN_PHOTOS = [
+          {}, {}, {}, {}, {}, {},
+          { m: '72% 30%' }
+        ];
+        var i = Math.floor(Math.random() * JOIN_PHOTOS.length);
+        var n = i + 1;
         var img = document.getElementById('join-photo');
+        if (JOIN_PHOTOS[i].m) img.style.setProperty('--join-pos-m', JOIN_PHOTOS[i].m);
         img.srcset = '/gfx/join/join-' + n + '-960.jpg 960w, /gfx/join/join-' + n + '.jpg 1920w';
         img.src = '/gfx/join/join-' + n + '.jpg';
       })();
