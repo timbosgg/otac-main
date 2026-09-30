@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OTAC | Arma Reforger Milsim Unit Australia & New Zealand</title>
-<meta name="description" content="OTAC (Oceania Tactical) is a semi-realistic Arma Reforger milsim unit for Australia and New Zealand, running platoon-level operations every Sunday at 1800 AEST.">
+<meta name="description" content="OTAC (Oceania Tactical) is a semi-realistic Arma Reforger milsim unit for Australia and New Zealand, running platoon-level operations every Sunday evening.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#18251C">
 <link rel="canonical" href="https://oceaniatactical.com/">
@@ -41,7 +41,7 @@
       "alternateName": "OTAC",
       "url": "https://oceaniatactical.com/",
       "logo": "https://oceaniatactical.com/gfx/otac.png",
-      "description": "Semi-realistic Arma Reforger milsim unit for Australia and New Zealand, running platoon-level operations every Sunday at 1800 AEST.",
+      "description": "Semi-realistic Arma Reforger milsim unit for Australia and New Zealand, running platoon-level operations every Sunday evening.",
       "areaServed": ["Australia", "New Zealand"],
       "sameAs": ["https://discord.gg/Vr4JNQQngU"]
     },
@@ -893,7 +893,7 @@
       <div class="entry-body">
         <ol class="week" aria-hidden="true">
           <li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li>
-          <li class="on">Sun<strong>1800</strong><small>AEST</small></li>
+          <li class="on">Sun<strong data-op-time>1800</strong><small>AEST</small></li>
         </ol>
         <div class="countdown" id="countdown" role="timer" hidden>
           <p class="countdown-label" id="countdown-label">Next operation in</p>
@@ -905,7 +905,7 @@
           </p>
         </div>
         <p>We run regular structured operations every week so you always have something to look forward to.</p>
-        <p>Operations kick off every Sunday from 1800 AEST. Be there, be ready.</p>
+        <p>Operations kick off every Sunday from <span data-op-time>1800</span> AEST. Be there, be ready.</p>
         <p class="ops-local" id="ops-local" hidden></p>
       </div>
     </section>
@@ -979,6 +979,7 @@
     const OP_LENGTH_MS = 3 * 60 * 60 * 1000; // treat an op as running for 3 hours after kick-off
     try {
       const OP_TZ = 'Australia/Brisbane'; // AEST, UTC+10 all year
+      const DST_TZ = 'Australia/Sydney';  // decides when the daylight-saving start time applies
       const wall = (date, timeZone) => {
         const parts = new Intl.DateTimeFormat('en-US', {
           timeZone, hourCycle: 'h23', weekday: 'short',
@@ -996,10 +997,15 @@
         const now = new Date();
         const w = wall(now, OP_TZ);
         const daysToSunday = (7 - ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(w.weekday)) % 7;
-        const toUtc = (days) => {
-          const local = Date.UTC(+w.year, w.month - 1, +w.day + days, 18, 0);
+        const at = (days, h, m) => {
+          const local = Date.UTC(+w.year, w.month - 1, +w.day + days, h, m);
           const guess = new Date(local - offsetMs(now, OP_TZ));
           return new Date(local - offsetMs(guess, OP_TZ));
+        };
+        // Ops start 1800 AEST, or 1730 AEST while Sydney is on daylight saving (AEDT)
+        const toUtc = (days) => {
+          const std = at(days, 18, 0);
+          return offsetMs(std, DST_TZ) > offsetMs(std, OP_TZ) ? at(days, 17, 30) : std;
         };
         let op = toUtc(daysToSunday);
         if (op.getTime() + OP_LENGTH_MS < now) op = toUtc(daysToSunday + 7);
@@ -1012,6 +1018,7 @@
       const cell = {};
       units.querySelectorAll('b').forEach((b) => { cell[b.dataset.unit] = b; });
       const pad = (n) => String(n).padStart(2, '0');
+      const timeSpots = document.querySelectorAll('[data-op-time]');
       const localTime = new Intl.DateTimeFormat(undefined, {
         weekday: 'long', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
       });
@@ -1020,6 +1027,11 @@
         const op = nextOp();
         const secs = Math.floor((op - new Date()) / 1000);
         const underway = secs <= 0;
+
+        // Show the start time (1800 or 1730) wherever the page states it
+        const hhmm = wall(op, OP_TZ);
+        const opTime = pad(hhmm.hour) + pad(hhmm.minute);
+        timeSpots.forEach((el) => { el.textContent = opTime; });
         countdown.classList.toggle('countdown-underway', underway);
         units.hidden = underway;
         label.textContent = underway ? 'Operation currently in progress.' : 'Next operation in';
